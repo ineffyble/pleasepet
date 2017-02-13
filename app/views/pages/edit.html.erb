@@ -18,11 +18,12 @@
     <%= f.text_field :url %>
   </div>
 
+  <div class="field">
+    <%= f.label :background %>
+    <%= f.file_field :background %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-
-
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>

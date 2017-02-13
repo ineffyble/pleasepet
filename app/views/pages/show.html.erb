@@ -20,3 +20,12 @@
       </div>
     <% end %>
 </div>
+
+<% if @page.background %>
+  <style>
+    body {
+      background-image: url(<%= @page.background.url %>);
+      background-size: cover;
+    }
+  </style>
+<% end %>

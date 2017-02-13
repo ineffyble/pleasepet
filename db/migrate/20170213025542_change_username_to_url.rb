@@ -1,5 +1,5 @@
-class ChangeurlToUrl < ActiveRecord::Migration[5.0]
+class ChangeUsernameToUrl < ActiveRecord::Migration[5.0]
   def change
-    rename_column :pages, :url, :url
+    rename_column :pages, :username, :url
   end
 end
