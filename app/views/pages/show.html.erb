@@ -1,0 +1,22 @@
+<% pet_name = @page.pet.name || @page.url %>
+<div class="jumbotron">
+  <h1>Please pet <%= pet_name %></h1>
+  <h2><%= pet_name %> has been petted <%= @page.pet.received_pettings.count %> times.</h2>
+  <div>
+    <%= button_to "Pet " + pet_name, @page.url + '/pet', remote: true, class: 'btn btn-primary btn-lg' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Recent pettings</h2>
+  </div>
+</div>
+<div class="row">
+    <% @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting| %>
+      <div class="col-md-4">
+        <h3>Petted by <%= petting.petter ? (petting.petter.name ? petting.petter.name : petting.petter.page.url) : 'Unknown' %></h3>
+        <h3><small><%= time_ago_in_words(petting.petted_at) %> ago</small></h3>
+      </div>
+    <% end %>
+</div>

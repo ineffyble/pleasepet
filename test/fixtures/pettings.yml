@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  petter_id: 1
+  petted_id: 1
+  petted_at: 2017-02-13 03:57:56
+
+two:
+  petter_id: 1
+  petted_id: 1
+  petted_at: 2017-02-13 03:57:56
