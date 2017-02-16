@@ -1,0 +1,13 @@
+<div class="nested-fields">
+  <% unless f.object.new_record? %>
+    <div class="field">
+      <%= f.object.sound.original_filename %>
+    </div>
+    <%= link_to_remove_association 'Remove noise', f %>
+  <% end %>
+  <% if f.object.new_record? %>
+    <div class="field">
+      <%= f.file_field :sound %>
+    </div>
+  <% end %>
+</div>

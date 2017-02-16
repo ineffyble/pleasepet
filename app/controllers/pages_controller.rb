@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+    @noises = Noise.where(page: @page)
   end
 
   # GET /pages/1/edit
@@ -48,7 +49,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:pet_id, :url, :name, :background)
+      params.require(:page).permit(:pet_id, :url, :name, :background, noises_attributes: [:id, :page_id, :sound, :_destroy])
     end
 
     def petting_params

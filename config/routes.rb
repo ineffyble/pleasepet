@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :noises
   resources :pettings
   root 'index#view'
 

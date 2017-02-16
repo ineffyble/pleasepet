@@ -19,9 +19,31 @@
   </div>
 
   <div class="field">
-    <%= f.label :background %>
+    <%= f.label :background %><br>
+    <% if @page.background.url %>
+      <%= image_tag(@page.background.url, size: "100") %>
+    <% end %>
     <%= f.file_field :background %>
   </div>
+
+  <%= f.label :sounds %>
+  <ul class="list-group">
+    <%= f.fields_for :noises do |noise| %>
+      <li class="list-group-item">
+        <div class="field">
+          <%= render 'noise_fields', f: noise %>
+        </div>
+      </li>
+    <% end %>
+
+    <%= f.fields_for :noise, Noise.new do |noise| %>
+      <li class="list-group-item">
+        <div class="links">
+          <%= link_to_add_association 'Add noise', f, :noises %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 
   <div class="actions">
     <%= f.submit %>

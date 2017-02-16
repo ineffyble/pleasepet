@@ -2,7 +2,7 @@
 <div class="jumbotron">
   <h1>Please pet <%= pet_name %></h1>
   <h2><%= pet_name %> has been petted <%= @page.pet.received_pettings.count %> times.</h2>
-  <div>
+  <div id="petbutton" data-turbolinks-permanent>
     <%= button_to "Pet " + pet_name, @page.url + '/pet', remote: true, class: 'btn btn-primary btn-lg' %>
   </div>
 </div>
@@ -28,4 +28,20 @@
       background-size: cover;
     }
   </style>
+<% end %>
+
+<% if !@page.noises.empty? %>
+  <script data-turbolinks-eval="false">
+
+    var noises = [
+      <% @page.noises.each do |n| %>
+        new Audio("<%= n.sound.url %>"),
+      <% end %>
+    ];
+
+    $(".btn").click(function() {
+      noises[Math.floor(Math.random()*noises.length)].play();
+    });
+
+  </script>
 <% end %>

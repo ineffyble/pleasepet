@@ -1,0 +1,1 @@
+json.partial! "noises/noise", noise: @noise
