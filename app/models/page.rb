@@ -1,6 +1,6 @@
 class Page < ApplicationRecord
-  validates :url, presence: true
-  validates :url, uniqueness: true
+  VALID_URL_REGEX = /\A[a-zA-Z0-9]+\z/
+  validates :url, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_URL_REGEX }
   belongs_to :pet, inverse_of: :page
   has_many :noises, inverse_of: :page
 
@@ -9,7 +9,9 @@ class Page < ApplicationRecord
 
   accepts_nested_attributes_for :noises, reject_if: :all_blank, allow_destroy: :rue
 
+  before_save { self.url = url.downcase! }
+
   def to_param
-    url
+    url.downcase
   end
 end
