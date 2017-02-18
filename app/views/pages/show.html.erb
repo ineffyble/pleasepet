@@ -57,12 +57,11 @@
 <% end %>
 
 <script>
-
-document.addEventListener('DOMContentLoaded', function () {
-            BackgroundCheck.init({
-                targets: '.adaptive',
-                images: 'body'
-            });
-        });
-
+BackgroundCheck.init({
+    targets: '.adaptive',
+    images: 'body'
+});
+document.addEventListener("turbolinks:load", function() {
+  BackgroundCheck.refresh();
+});
 </script>
