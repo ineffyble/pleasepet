@@ -17,6 +17,7 @@
 
 .jumbotron {
   text-align: center;
+  background-color: none;
 }
 
 .header h3, .header .nav li {
@@ -29,4 +30,16 @@
 
 .index .btn-lg {
   min-width: 100%;
+}
+
+.background--light {
+  color: black !important;
+}
+
+.background--dark {
+  color: white !important;
+}
+
+.jumbotron {
+  background: none;
 }

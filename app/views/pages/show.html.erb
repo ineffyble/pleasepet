@@ -1,7 +1,7 @@
 <% pet_name = @page.pet.name || @page.url %>
 <div class="jumbotron">
-  <h1>Please pet <%= pet_name %></h1>
-  <h2><%= pet_name %> has been petted <%= @page.pet.received_pettings.count %> times.</h2>
+  <h1 class="adaptive">Please pet <%= pet_name %></h1>
+  <h2 class="adaptive"><%= pet_name %> has been petted <%= @page.pet.received_pettings.count %> times.</h2>
   <div id="petbutton" onclick="makeNoise()">
     <%= button_to "Pet " + pet_name, @page.url + '/pet', remote: true, class: 'btn btn-primary btn-lg' %>
   </div>
@@ -9,18 +9,18 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h2>Recent pettings</h2>
+    <h2 class="adaptive">Recent pettings</h2>
   </div>
 </div>
 <div class="row">
     <% @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting| %>
       <div class="col-md-4">
         <% if petting.petter %>
-          <h3>Petted by <a href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
+          <h3 class="adaptive">Petted by <a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
         <% else %>
-          <h3>Petted anonymously</h3>
+          <h3 class="adaptive">Petted anonymously</h3>
         <% end %>
-        <h3><small><%= time_ago_in_words(petting.petted_at) %> ago</small></h3>
+        <h3><small class="adaptive"><%= time_ago_in_words(petting.petted_at) %> ago</small></h3>
       </div>
     <% end %>
 </div>
@@ -55,3 +55,14 @@
     }
   </script>
 <% end %>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+            BackgroundCheck.init({
+                targets: '.adaptive',
+                images: 'body'
+            });
+        });
+
+</script>
