@@ -4,7 +4,9 @@ class PettingsController < ApplicationController
   # GET /pettings
   # GET /pettings.json
   def index
-    @pettings = Petting.all
+    @pettings = Petting.where("petter_id=? OR petted_id=?", current_pet.id, current_pet.id)
+    @petters = Petting.where("petted_id=?", current_pet.id).group(:petter_id).order('count_id desc').count('id')
+    @petted = Petting.where("petter_id=?", current_pet.id).group(:petted_id).order('count_id desc').count('id')
   end
 
   # GET /pettings/1

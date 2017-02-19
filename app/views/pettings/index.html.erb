@@ -1,31 +1,32 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Your petters</h1>
 
-<h1>Pettings</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Petter</th>
-      <th>Petted</th>
-      <th>Petted at</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pettings.each do |petting| %>
-      <tr>
-        <td><%= petting.petter_id %></td>
-        <td><%= petting.petted_id %></td>
-        <td><%= petting.petted_at %></td>
-        <td><%= link_to 'Show', petting %></td>
-        <td><%= link_to 'Edit', edit_petting_path(petting) %></td>
-        <td><%= link_to 'Destroy', petting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Petting', new_petting_path %>
+    <ul class="list-group">
+      <% @petters.each do |petter| %>
+      <li class="list-group-item">
+        <% if petter[0] %>
+        <% pet = Pet.find(petter[0]) %>
+        <%= link_to pet.name, pet.page.url %>
+        <% else %>
+        Anonymous
+        <% end %>
+        <span class="badge"><%= petter[1] %></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h1>Your petted pets</h1>
+    <ul class="list-group">
+      <% @petted.each do |petted| %>
+      <li class="list-group-item">
+        <% pet = Pet.find(petted[0]) %>
+        <%= link_to pet.name, pet.page.url %>
+        <span class="badge"><%= petted[1] %></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
