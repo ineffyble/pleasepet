@@ -42,9 +42,9 @@
   </style>
 <% end %>
 
-<% if !@page.noises.empty? %>
-  <script data-turbolinks-eval="false">
-
+  <script>
+  if ((typeof current_pet == 'undefined') || current_pet != '<%= @page.url %>') {
+    <% if !@page.noises.empty? %>
     var noises = [
       <% @page.noises.each do |n| %>
         new Audio("<%= n.sound.url %>"),
@@ -54,15 +54,17 @@
     function makeNoise() {
       noises[Math.floor(Math.random()*noises.length)].play();
     };
+  }
+
+  <% else %>
+  function makeNoise() {
+    console.log("Mew :(");
+  }
+  <% end %>
+
+  var current_pet = '<%= @page.url %>';
 
   </script>
-<% else %>
-  <script data-turbolinks-eval="false">
-    function makeNoise() {
-      console.log("Mew :(");
-    }
-  </script>
-<% end %>
 
 <script>
 BackgroundCheck.init({
