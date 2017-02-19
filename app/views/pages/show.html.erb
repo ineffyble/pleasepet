@@ -25,12 +25,19 @@
     <% end %>
 </div>
 
-<% if @page.background %>
+<% if @page.background.exists? %>
   <style>
     body {
       background-image: url(<%= @page.background.url %>);
       background-size: cover;
       background-position: center;
+    }
+  </style>
+<% else %>
+  <style>
+    body {
+      background-image: url('/backgrounds/original/missing.png');
+      background-repeat: repeat;
     }
   </style>
 <% end %>
