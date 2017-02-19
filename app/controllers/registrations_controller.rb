@@ -12,6 +12,11 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(resource_name).permit(allow)
   end
 
+  def account_update_params
+    allow = [:name, :cpf, :email, :password, :password_confirmation, :current_password]
+    params.require(resource_name).permit(allow)
+  end
+
   def after_sign_up_path_for(resource)
      edit_page_url(url: current_pet.page.url)
   end
