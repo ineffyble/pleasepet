@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :pet]
   before_action :authenticate_pet!, only: [:edit, :update]
+  before_action :verify_pet, only: [:edit, :update]
 
   # GET /pages/1
   # GET /pages/1.json
@@ -9,11 +10,7 @@ class PagesController < ApplicationController
   end
 
   # GET /pages/1/edit
-  def edit
-    if @page.pet != current_pet
-      redirect_to edit_page_url(url: current_pet.page.url)
-    end
-  end
+  def edit; end
 
   # PATCH/PUT /pages/1
   # PATCH/PUT /pages/1.json
@@ -57,5 +54,11 @@ class PagesController < ApplicationController
 
   def petting_params
     params.require(:petting).permit(:petter_id, :petted_id, :petted_at)
+  end
+
+  def verify_pet
+    if @page.pet != current_pet
+      redirect_to edit_page_url(url: current_pet.page.url)
+    end
   end
 end

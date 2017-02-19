@@ -20,4 +20,5 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-/public/system/pages
+/public/system/*
+/public/system

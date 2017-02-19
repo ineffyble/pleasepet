@@ -4,10 +4,9 @@ Rails.application.routes.draw do
 
   get '/evelyn' => redirect("http://evelyn.pet")
 
-  resources :noises
-  resources :pettings
+  resources :pettings, only: [:index]
   resources :pages, path: '', only: [:show, :update], param: :url
-  resources :pages, param: :url
+  resources :pages, only: [:edit], param: :url
   post '/:url/pet' => 'pages#pet'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
