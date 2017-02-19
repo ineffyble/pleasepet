@@ -1,4 +1,3 @@
 class IndexController < ApplicationController
-  def view
-  end
+  def view; end
 end

@@ -17,7 +17,7 @@ class NoisesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create noise" do
     assert_difference('Noise.count') do
-      post noises_url, params: { noise: {  } }
+      post noises_url, params: { noise: {} }
     end
 
     assert_redirected_to noise_url(Noise.last)
@@ -34,7 +34,7 @@ class NoisesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update noise" do
-    patch noise_url(@noise), params: { noise: {  } }
+    patch noise_url(@noise), params: { noise: {} }
     assert_redirected_to noise_url(@noise)
   end
 

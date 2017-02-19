@@ -30,30 +30,32 @@ class PagesController < ApplicationController
   end
 
   def pet
-    params[:petting] = {}
+    params[:petting] = {
+      petted_id: @page.pet_id,
+      petted_at: DateTime.now.utc
+    }
     if current_pet
       params[:petting][:petter_id] = current_pet.id
     end
-    params[:petting][:petted_id] = @page.pet_id
-    params[:petting][:petted_at] = DateTime.now
     @petting = Petting.new(petting_params)
     @petting.save!
     redirect_to @page
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_page
-      params[:url].downcase!
-      @page = Page.find_by! url: params[:url]
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def page_params
-      params.require(:page).permit(:pet_id, :url, :name, :background, noises_attributes: [:id, :page_id, :sound, :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_page
+    params[:url].downcase!
+    @page = Page.find_by! url: params[:url]
+  end
 
-    def petting_params
-      params.require(:petting).permit(:petter_id, :petted_id, :petted_at)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def page_params
+    params.require(:page).permit(:pet_id, :url, :name, :background, noises_attributes: [:id, :page_id, :sound, :_destroy])
+  end
+
+  def petting_params
+    params.require(:petting).permit(:petter_id, :petted_id, :petted_at)
+  end
 end

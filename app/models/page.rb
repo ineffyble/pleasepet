@@ -9,7 +9,7 @@ class Page < ApplicationRecord
 
   accepts_nested_attributes_for :noises, reject_if: :all_blank, allow_destroy: :rue
 
-  before_save { self.url = self.url.downcase }
+  before_save { self.url = url.downcase }
 
   def to_param
     url.downcase

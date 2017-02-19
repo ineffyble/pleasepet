@@ -5,5 +5,4 @@ class IndexControllerTest < ActionDispatch::IntegrationTest
     get index_view_url
     assert_response :success
   end
-
 end

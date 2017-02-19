@@ -9,8 +9,7 @@ class PettingsController < ApplicationController
 
   # GET /pettings/1
   # GET /pettings/1.json
-  def show
-  end
+  def show; end
 
   # GET /pettings/new
   def new
@@ -18,8 +17,7 @@ class PettingsController < ApplicationController
   end
 
   # GET /pettings/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /pettings
   # POST /pettings.json
@@ -62,13 +60,14 @@ class PettingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_petting
-      @petting = Petting.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def petting_params
-      params.require(:petting).permit(:petter_id, :petted_id, :petted_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_petting
+    @petting = Petting.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def petting_params
+    params.require(:petting).permit(:petter_id, :petted_id, :petted_at)
+  end
 end

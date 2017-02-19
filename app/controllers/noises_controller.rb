@@ -9,8 +9,7 @@ class NoisesController < ApplicationController
 
   # GET /noises/1
   # GET /noises/1.json
-  def show
-  end
+  def show; end
 
   # GET /noises/new
   def new
@@ -18,8 +17,7 @@ class NoisesController < ApplicationController
   end
 
   # GET /noises/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /noises
   # POST /noises.json
@@ -62,13 +60,14 @@ class NoisesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_noise
-      @noise = Noise.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def noise_params
-      params.require(:noise).permit(:sound)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_noise
+    @noise = Noise.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def noise_params
+    params.require(:noise).permit(:sound)
+  end
 end
