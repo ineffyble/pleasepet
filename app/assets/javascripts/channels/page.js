@@ -3,7 +3,7 @@ $(document).on("turbolinks:load", function() {
     App.page.unsubscribe();
     delete App.page;
   }
-  if ($("#pet")) {
+  if (document.getElementById("pet")) {
     App.page = App.cable.subscriptions.create({
     channel: "PageChannel",
     url: $("#pet").data('page-url')
