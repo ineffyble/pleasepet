@@ -9,6 +9,11 @@ class PageChannel < ApplicationCable::Channel
   end
 
   def pet
+    if !current_pet
+      if Petting.where("petted_at >= :date", :date => 1.minute.ago).count > 450
+        reject_unauthorized_connection
+      end
+    end
     params[:url].downcase!
     @page = Page.find_by! url: params[:url]
     petting_params = {
