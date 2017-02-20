@@ -36,7 +36,12 @@ class PagesController < ApplicationController
     end
     @petting = Petting.new(petting_params)
     @petting.save!
-    redirect_to @page
+    if @petting.save
+      ActionCable.server.broadcast "page_channel_#{@page.url}",
+        petter: @petting.petter ? { name: @petting.petter.name, url: @petting.petter.page.url } : false,
+        petted_at: @petting.petted_at,
+        pet_count: @page.pet.received_pettings.count
+    end
   end
 
   private

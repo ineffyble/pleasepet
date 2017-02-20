@@ -1,79 +1,96 @@
 <% pet_name = @page.pet.name || @page.url %>
-<div class="jumbotron">
-  <h1 class="adaptive">Please pet <%= pet_name %></h1>
-  <h2 class="adaptive"><%= pet_name %> has been petted <%= @page.pet.received_pettings.count %> times.</h2>
-  <div id="petbutton" onclick="makeNoise()">
-    <%= button_to "Pet " + pet_name, @page.url + '/pet', remote: true, class: 'btn btn-primary btn-lg' %>
+<div id="pet" data-page-url="<%= @page.url %>">
+  <div class="jumbotron">
+    <h1 class="adaptive">Please pet <%= pet_name %></h1>
+    <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet.received_pettings.count %></span> times.</h2>
+    <input type="submit" class="btn btn-primary btn-lg" value="Pet <%= pet_name %>" onClick="pet()">
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12">
-    <h2 class="adaptive">Recent pettings</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="adaptive">Recent pettings</h2>
+    </div>
   </div>
-</div>
-<div class="row">
-    <% @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting| %>
-      <div class="col-md-4">
-        <% if petting.petter %>
-          <h3 class="adaptive">Petted by <a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
-        <% else %>
-          <h3 class="adaptive">Petted anonymously</h3>
-        <% end %>
-        <h3><small class="adaptive"><%= time_ago_in_words(petting.petted_at) %> ago</small></h3>
-      </div>
-    <% end %>
-</div>
-
-<% if @page.background.exists? %>
-  <style>
-    body {
-      background-image: url(<%= @page.background.url %>);
-      background-size: cover;
-      background-position: center;
-    }
-  </style>
-<% else %>
-  <style>
-    body {
-      background-image: url('/backgrounds/original/missing.png');
-      background-repeat: repeat;
-    }
-  </style>
-<% end %>
-
-  <script>
-  if ((typeof current_pet == 'undefined') || current_pet != '<%= @page.url %>') {
-    <% if !@page.noises.empty? %>
-    var noises = [
-      <% @page.noises.each do |n| %>
-        new Audio("<%= n.sound.url %>"),
+  <div class="row" id="pettings">
+      <% @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting| %>
+        <div class="col-md-4">
+          <% if petting.petter %>
+            <h3 class="adaptive">Petted by <a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
+          <% else %>
+            <h3 class="adaptive">Petted anonymously</h3>
+          <% end %>
+          <h3><small class="adaptive"><%= time_ago_in_words(petting.petted_at) %> ago</small></h3>
+        </div>
       <% end %>
-    ];
+  </div>
 
-    function makeNoise() {
-      noises[Math.floor(Math.random()*noises.length)].play();
-    };
-  }
-
+  <% if @page.background.exists? %>
+    <style>
+      body {
+        background-image: url(<%= @page.background.url %>);
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
   <% else %>
-  function makeNoise() {
-    console.log("Mew :(");
-  }
-
-  }
+    <style>
+      body {
+        background-image: url('/backgrounds/original/missing.png');
+        background-repeat: repeat;
+      }
+    </style>
   <% end %>
 
-  var current_pet = '<%= @page.url %>';
+    <script>
+    if ((typeof current_pet == 'undefined') || current_pet != '<%= @page.url %>') {
+      <% if !@page.noises.empty? %>
+      var noises = [
+        <% @page.noises.each do |n| %>
+          new Audio("<%= n.sound.url %>"),
+        <% end %>
+      ];
 
+      function makeNoise() {
+        noises[Math.floor(Math.random()*noises.length)].play();
+      };
+    }
+
+    <% else %>
+    function makeNoise() {
+      console.log("Mew :(");
+    }
+
+    }
+    <% end %>
+
+    var current_pet = '<%= @page.url %>';
+
+    </script>
+
+  <script>
+  BackgroundCheck.init({
+      targets: '.adaptive',
+      images: 'body'
+  });
+  document.addEventListener("turbolinks:load", function() {
+    BackgroundCheck.refresh();
+  });
   </script>
 
-<script>
-BackgroundCheck.init({
-    targets: '.adaptive',
-    images: 'body'
-});
-document.addEventListener("turbolinks:load", function() {
-  BackgroundCheck.refresh();
-});
-</script>
+  <script>
+    function pet() {
+      $.ajax({
+        type: "POST",
+        url: "/" + $("#pet").data('page-url') + "/pet",
+        beforeSend: $.rails.CSRFProtection,
+        data: {
+          "please": "pet"
+        },
+        success: function (json) {
+          console.log(json);
+        }
+    });
+    makeNoise();
+    }
+  </script>
+</div>
