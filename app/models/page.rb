@@ -14,4 +14,11 @@ class Page < ApplicationRecord
   def to_param
     url.downcase
   end
+
+  after_create do
+    if ENV["SLACK_WEBHOOK_URL"]
+      notifier = Slack::Notifier.new ENV["SLACK_WEBHOOK_URL"]
+      notifier.ping self.pet.name + " <" + self.pet.email + "> - /" + self.url
+    end
+  end
 end
