@@ -13,7 +13,7 @@
   </div>
   <div class="row" id="pettings">
       <% @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting| %>
-        <div class="col-md-4">
+        <div class="col-md-4 petting" data-petting-id="<%= petting.id %>">
           <% if petting.petter %>
             <h3 class="adaptive">Petted by <a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
           <% else %>
@@ -77,10 +77,4 @@
   });
   </script>
 
-  <script>
-    function pet() {
-      App.page.petting();
-      makeNoise();
-    }
-  </script>
 </div>

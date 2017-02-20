@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:show, :edit, :update, :pet]
+  before_action :set_page, only: [:show, :edit, :update, :pet, :pets]
   before_action :authenticate_pet!, only: [:edit, :update]
   before_action :verify_pet, only: [:edit, :update]
 
@@ -35,18 +35,32 @@ class PagesController < ApplicationController
       params[:petting][:petter_id] = current_pet.id
     end
     @petting = Petting.new(petting_params)
-    @petting.save!
     if @petting.save
-      ActionCable.server.broadcast "page_channel_#{@page.url}",
+      petting = {
+        id: @petting.id,
         petter: @petting.petter ? { name: @petting.petter.name, url: @petting.petter.page.url } : false,
         petted_at: @petting.petted_at,
-        pet_count: @page.pet.received_pettings.count
-      ActionCable.server.broadcast "stats_channel",
-        total_pets: Pet.all.count,
-        total_pettings: Petting.all.count
-      render :text => "😸"
+      }
+      respond_to do |format|
+        format.json { render json: petting }
+      end
     end
   end
+
+  def pets
+    pettings = []
+    @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting|
+      pettings.push({
+        id: petting.id,
+        petter: petting.petter ? { name: petting.petter.name, url: petting.petter.page.url } : false,
+        petted_at: petting.petted_at,
+      })
+    end
+    respond_to do |format|
+      format.json { render json: pettings }
+    end
+  end
+
 
   private
 
