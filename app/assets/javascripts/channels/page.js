@@ -30,7 +30,7 @@ $(document).on("turbolinks:load", function() {
       if ($("#pettings .col-md-4").length > 6) {
         $("#pettings .col-md-4").last().remove();
       }
-      console.log(data);
+      BackgroundCheck.refresh();
       // Called when there's incoming data on the websocket for this channel
     }
   });

@@ -41,6 +41,7 @@ class PagesController < ApplicationController
         petter: @petting.petter ? { name: @petting.petter.name, url: @petting.petter.page.url } : false,
         petted_at: @petting.petted_at,
         pet_count: @page.pet.received_pettings.count
+      render :text => "😸"
     end
   end
 
