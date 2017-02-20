@@ -18,14 +18,27 @@ $(document).on("turbolinks:load", function() {
 
     received: function(data) {
       $("#petcount").html(data.pet_count);
-      var newPetting = '<div class="col-md-4">';
+      var newPetting = document.createElement("div");
+      newPetting.className = "col-md-4";
+      var petterHeader = document.createElement("h3");
+      petterHeader.className = "adaptive";
       if (data.petter) {
-        newPetting = newPetting + '<h3 class="adaptive">Petted by <a class="adaptive" href="/' + data.petter.url + '">' + data.petter.name + '</a></h3>';
+        petterHeader.textContent = "Petted by ";
+        var petterLink = document.createElement("a");
+        petterLink.className = "adaptive";
+        petterLink.href = "/" + data.petter.url;
+        petterLink.textContent = data.petter.name;
+        petterHeader.appendChild(petterLink);
       } else {
-        newPetting = newPetting + '<h3 class="adaptive">Petted anonymously</h3>';
+        petterHeader.textContent = "Petted anonymously";
       }
-      newPetting = newPetting + '<h3><small class="adaptive">Just now</small></h3>';
-      newPetting = newPetting + '</div>';
+      var petterFooter = document.createElement("h3");
+      var petterFooterInner = document.createElement("small");
+      petterFooterInner.className = "adaptive";
+      petterFooterInner.textContent = "Just now";
+      petterFooter.appendChild(petterFooterInner);
+      newPetting.appendChild(petterHeader);
+      newPetting.appendChild(petterFooter);
       $(newPetting).hide().prependTo("#pettings").fadeIn(1000);
       if ($("#pettings .col-md-4").length > 6) {
         $("#pettings .col-md-4").last().remove();
