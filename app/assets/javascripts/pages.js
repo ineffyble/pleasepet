@@ -39,6 +39,9 @@ function getPets() {
             $(newPetting).attr('data-petting-id', data.id);
             $(newPetting).hide().prependTo("#pettings").fadeIn(1000);
             $(".petting").last().remove();
+            var petCount = parseInt($("#petcount").text());
+            petCount = petCount + 1;
+            $("#petcount").text(petCount);
           }
         });
       }
@@ -81,6 +84,9 @@ function pet() {
       $(newPetting).attr('data-petting-id', data.id);
       $(newPetting).hide().prependTo("#pettings").fadeIn(1000);
       $(".petting").last().remove();
+      var petCount = parseInt($("#petcount").text());
+      petCount = petCount + 1;
+      $("#petcount").text(petCount);
     }
   });
   makeNoise();
