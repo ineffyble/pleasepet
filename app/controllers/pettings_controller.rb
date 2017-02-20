@@ -26,14 +26,13 @@ class PettingsController < ApplicationController
   def create
     @petting = Petting.new(petting_params)
 
-    if @petting.save
-      ActionCable.server.broadcast 'page_channel',
-        petter: @petting.petter_id
-        petted_at: @petting.petted_ad
-    else
-      respond_to do |format|
-          format.html { render :new }
-          format.json { render json: @petting.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @petting.save
+        format.html { redirect_to @petting, notice: 'Petting was successfully created.' }
+        format.json { render :show, status: :created, location: @petting }
+      else
+        format.html { render :new }
+        format.json { render json: @petting.errors, status: :unprocessable_entity }
       end
     end
   end
