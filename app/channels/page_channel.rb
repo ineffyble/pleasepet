@@ -8,7 +8,7 @@ class PageChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def pet
+  def petting
     params[:url].downcase!
     @page = Page.find_by! url: params[:url]
     petting_params = {

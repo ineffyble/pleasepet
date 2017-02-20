@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get '/evelyn' => redirect("http://evelyn.pet")
 
+  get '/naptime' => 'index#naptime'
+
   resources :pettings, only: [:index]
   resources :pages, path: '', only: [:show, :update], param: :url
   resources :pages, only: [:edit], param: :url

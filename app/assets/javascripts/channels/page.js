@@ -4,6 +4,7 @@ $(document).on("turbolinks:load", function() {
     delete App.page;
   }
   if (document.getElementById("pet")) {
+    var numberOfPettings = 0;
     App.page = App.cable.subscriptions.create({
     channel: "PageChannel",
     url: $("#pet").data('page-url')
@@ -47,8 +48,14 @@ $(document).on("turbolinks:load", function() {
       // Called when there's incoming data on the websocket for this channel
     },
 
-    pet: function() {
-      this.perform('pet', {url: $("#pet").data('page-url')});
+    petting: function() {
+      this.perform('petting', {url: $("#pet").data('page-url')});
+      numberOfPettings = numberOfPettings + 1;
+      console.log(numberOfPettings);
+      if (numberOfPettings > 1000) {
+        App.cable.disconnect();
+        window.location.replace("/naptime");
+      }
     }
   });
 }

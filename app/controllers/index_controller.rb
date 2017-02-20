@@ -4,4 +4,6 @@ class IndexController < ApplicationController
     @stats[:total_pets] = Pet.all.count
     @stats[:total_pettings] = Petting.all.count
   end
+  def naptime
+  end
 end
