@@ -20,13 +20,11 @@ class PageChannel < ApplicationCable::Channel
     end
     @petting = Petting.new(petting_params)
     if @petting.save
+      petter = @petting.petter
       ActionCable.server.broadcast "page_channel_#{@page.url}",
-        petter: @petting.petter ? { name: @petting.petter.name, url: @petting.petter.page.url } : false,
+        petter: petter ? { name: petter.name, url: petter.page.url } : false,
         petted_at: @petting.petted_at,
         pet_count: @page.pet.received_pettings.count
-      ActionCable.server.broadcast "stats_channel",
-        total_pets: Pet.all.count,
-        total_pettings: Petting.all.count
     end
   end
 end
