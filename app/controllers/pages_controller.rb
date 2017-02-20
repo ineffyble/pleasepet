@@ -48,16 +48,16 @@ class PagesController < ApplicationController
   end
 
   def pets
-    pettings = []
-    @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting|
-      pettings.push({
-        id: petting.id,
-        petter: petting.petter ? { name: petting.petter.name, url: petting.petter.page.url } : false,
-        petted_at: petting.petted_at,
-      })
-    end
+    # pettings = []
+    # @page.pet.received_pettings.sort_by(&:petted_at).reverse.first(6).each do |petting|
+    #   pettings.push({
+    #     id: petting.id,
+    #     petter: petting.petter ? { name: petting.petter.name, url: petting.petter.page.url } : false,
+    #     petted_at: petting.petted_at,
+    #   })
+    # end
     respond_to do |format|
-      format.json { render json: pettings }
+      format.json { render json: { count: @page.pet.received_pettings.count } }
     end
   end
 
