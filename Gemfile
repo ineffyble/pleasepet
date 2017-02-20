@@ -34,6 +34,7 @@ gem 'redis', '~> 3.0'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'warden'
 
 gem "paperclip", "~> 5.0.0"
 

@@ -45,6 +45,10 @@ $(document).on("turbolinks:load", function() {
       }
       BackgroundCheck.refresh();
       // Called when there's incoming data on the websocket for this channel
+    },
+
+    pet: function() {
+      this.perform('pet', {url: $("#pet").data('page-url')});
     }
   });
 }

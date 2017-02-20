@@ -79,15 +79,8 @@
 
   <script>
     function pet() {
-      $.ajax({
-        type: "POST",
-        url: "/" + $("#pet").data('page-url') + "/pet",
-        beforeSend: $.rails.CSRFProtection,
-        data: {
-          "please": "pet"
-        }
-      });
-    makeNoise();
+      App.page.pet();
+      makeNoise();
     }
   </script>
 </div>
