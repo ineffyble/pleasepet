@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215161229) do
+ActiveRecord::Schema.define(version: 20170219235920) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170215161229) do
     t.string   "sound_content_type"
     t.integer  "sound_file_size"
     t.datetime "sound_updated_at"
+    t.index ["page_id"], name: "index_noises_on_page_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170215161229) do
     t.string   "background_content_type"
     t.integer  "background_file_size"
     t.datetime "background_updated_at"
+    t.index ["pet_id"], name: "index_pages_on_pet_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 20170215161229) do
     t.datetime "petted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["petted_id"], name: "index_pettings_on_petted_id"
+    t.index ["petter_id"], name: "index_pettings_on_petter_id"
   end
 
 end
