@@ -2,7 +2,7 @@
 <div id="pet" data-page-url="<%= @page.url %>">
   <div class="jumbotron">
     <h1 class="adaptive">Please pet <%= pet_name %></h1>
-    <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet.received_pettings.size %></span> times.</h2>
+    <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet.received_pettings_count || 0 %></span> times.</h2>
     <input type="submit" class="btn btn-primary btn-lg" value="Pet <%= pet_name %>" onClick="pet()">
   </div>
 
