@@ -74,6 +74,10 @@ function pet() {
   }
 
   makeNoise();
+  $("input[type=submit]").attr("disabled", "disabled");
+  setTimeout(function() {
+    $("input[type=submit]").removeAttr("disabled");
+  }, 100);
 }
 
 function sendPets() {

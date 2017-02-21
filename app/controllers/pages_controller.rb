@@ -29,6 +29,9 @@ class PagesController < ApplicationController
   def pet
     puts params.to_json
     number_of_pets = (params[:quantity] ? params[:quantity] : 1)
+    if number_of_pets > 100
+      number_of_pets = 1
+    end
     petter_id = (current_pet ? current_pet.id : false)
     set_received_pettings_counter
     number_of_pets.times do |i|
