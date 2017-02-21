@@ -27,10 +27,15 @@ class PagesController < ApplicationController
   end
 
   def pet
+    puts params.to_json
+    number_of_pets = (params[:quantity] ? params[:quantity] : 1)
     petter_id = (current_pet ? current_pet.id : false)
-    PettingsInserterWorker.perform_async(DateTime.now.utc, @page.pet_id, petter_id)
     set_received_pettings_counter
-    @received_pettings_counter.increment
+    number_of_pets.times do |i|
+      puts "Petting!"
+      PettingsInserterWorker.perform_async(DateTime.now.utc, @page.pet_id, petter_id)
+      @received_pettings_counter.increment
+    end
     respond_to do |format|
       format.json { render json: { count: @received_pettings_counter.value } }
     end

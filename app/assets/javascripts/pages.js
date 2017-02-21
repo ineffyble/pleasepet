@@ -1,5 +1,8 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+var queued_petting_count = 0;
+var send_pettings_timer;
+
 function getPets() {
 
   var page_url = $("#pet").data('page-url');
@@ -63,11 +66,26 @@ function pet() {
 
   var page_url = $("#pet").data('page-url');
 
+  queued_petting_count = queued_petting_count + 1;
+
+  if (!(send_pettings_timer)) {
+    send_pettings_timer = setTimeout(sendPets, 5000);
+    send_pettings_timer = true;
+  }
+
+  makeNoise();
+}
+
+function sendPets() {
+  console.log("Sending " + queued_petting_count + " queued pets.");
+  var page_url = $("#pet").data('page-url');
+
   $.ajax({
     url: '/' + page_url + '/pet',
     method: 'POST',
     dataType: 'json',
     contentType: 'application/json',
+    data: JSON.stringify({ quantity: queued_petting_count }),
     success: function(data) {
       // var newPetting = document.createElement("div");
       // newPetting.className = "col-md-4 petting";
@@ -98,7 +116,8 @@ function pet() {
       // $("#petcount").text(petCount);
     }
   });
-  makeNoise();
+  queued_petting_count = 0;
+  send_pettings_timer = false;
 }
 
 $(document).on("turbolinks:load", function() {
