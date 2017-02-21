@@ -86,10 +86,8 @@ class PagesController < ApplicationController
   def set_received_pettings_counter
     id = @page.pet.id
     @received_pettings_counter = Redis::Counter.new("pettings:received:#{id}")
-    if @received_pettings_counter.value == 0
-      if !Pet.find(id).received_pettings.size.nil?
-        @received_pettings_counter = Redis::Counter.new("pettings:received:#{id}", start: Pet.find(id).received_pettings.size)
-      end
+    if @received_pettings_counter.value.nil? || @received_pettings_counter.value == 0
+        @received_pettings_counter = Redis::Counter.new("pettings:received:#{id}", start: @page.pet.received_pettings_count || 0)
     end
   end
 end
