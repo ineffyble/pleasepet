@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   root 'index#view'
   devise_for :pets, controllers: { registrations: 'registrations' }
 
