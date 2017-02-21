@@ -44,7 +44,7 @@
     </style>
   <% end %>
 
-  <% if @page.text-color && !@page.text_color.empty? %>
+  <% if !@page.text_color.nil? %>
     <style>
       .adaptive {
         color: <%= @page.text_color %> !important;
