@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221120141) do
+ActiveRecord::Schema.define(version: 20170221121835) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170221120141) do
     t.integer  "background_file_size"
     t.datetime "background_updated_at"
     t.index ["pet_id"], name: "index_pages_on_pet_id"
+    t.index ["url"], name: "index_pages_on_url"
   end
 
   create_table "pets", force: :cascade do |t|
