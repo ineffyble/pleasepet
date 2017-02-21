@@ -83,4 +83,11 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  if ENV['REDIS_URL']
+   redis_url = URI.parse(ENV['REDIS_URL'])
+   ENV['REDIS_HOST'] = redis_url.host
+   ENV['REDIS_PORT'] = redis_url.port.to_s
+   ENV['REDIS_PASSWORD'] = redis_url.password
+ end
 end

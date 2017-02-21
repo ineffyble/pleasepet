@@ -27,23 +27,12 @@ class PagesController < ApplicationController
   end
 
   def pet
-    params[:petting] = {
-      petted_id: @page.pet_id,
-      petted_at: DateTime.now.utc
-    }
-    if current_pet
-      params[:petting][:petter_id] = current_pet.id
-    end
-    @petting = Petting.new(petting_params)
-    if @petting.save
-      petting = {
-        id: @petting.id,
-        petter: @petting.petter ? { name: @petting.petter.name, url: @petting.petter.page.url } : false,
-        petted_at: @petting.petted_at,
-      }
-      respond_to do |format|
-        format.json { render json: petting }
-      end
+    petter_id = (current_pet ? current_pet.id : false)
+    PettingsInserterWorker.perform_async(DateTime.now.utc, @page.pet_id, petter_id)
+    set_received_pettings_counter
+    @received_pettings_counter.increment
+    respond_to do |format|
+      format.json { render json: { count: @received_pettings_counter.value } }
     end
   end
 
@@ -56,8 +45,9 @@ class PagesController < ApplicationController
     #     petted_at: petting.petted_at,
     #   })
     # end
+    set_received_pettings_counter
     respond_to do |format|
-      format.json { render json: { count: @page.pet.received_pettings.size } }
+      format.json { render json: { count: @received_pettings_counter.value } }
     end
   end
 
@@ -82,6 +72,14 @@ class PagesController < ApplicationController
   def verify_pet
     if @page.pet != current_pet
       redirect_to edit_page_url(url: current_pet.page.url)
+    end
+  end
+
+  def set_received_pettings_counter
+    id = @page.pet.id
+    @received_pettings_counter = Redis::Counter.new("pettings:received:#{id}")
+    if @received_pettings_counter.value == 0
+      @received_pettings_counter.increment(Pet.find(id).received_pettings.size)
     end
   end
 end
