@@ -12,6 +12,14 @@
  *
  */
 
+ /*
+ *= require jquery.minicolors
+ */
+
+ /*
+ *= require rails_bootstrap_forms
+ */
+
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
@@ -30,14 +38,6 @@
 
 .index .btn-lg {
   min-width: 100%;
-}
-
-.background--light {
-  color: black !important;
-}
-
-.background--dark {
-  color: white !important;
 }
 
 .jumbotron {

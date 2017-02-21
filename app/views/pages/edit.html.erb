@@ -1,9 +1,9 @@
 <h1>Edit your pet page</h1>
 
-<%= form_for(@page) do |f| %>
+<%= bootstrap_form_for(@page) do |f| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(page.errors.count, "error") %> prohibited this page from being saved:</h2>
+      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
 
       <ul>
       <% @page.errors.full_messages.each do |message| %>
@@ -13,26 +13,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :url %>
     <%= f.text_field :url %>
-  </div>
 
-  <div class="field">
-    <%= f.label :background %><br>
     <% if @page.background.url %>
       <%= image_tag(@page.background.url, size: "100") %>
     <% end %>
     <%= f.file_field :background %>
-  </div>
+
+    <%= f.text_field :text_color, class: 'colorpicker' %>
 
   <%= f.label :sounds %>
   <ul class="list-group">
     <%= f.fields_for :noises do |noise| %>
       <li class="list-group-item">
-        <div class="field">
           <%= render 'noise_fields', f: noise %>
-        </div>
       </li>
     <% end %>
 
@@ -49,3 +43,7 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+$('.colorpicker').minicolors({theme: 'bootstrap'});
+</script>

@@ -44,6 +44,14 @@
     </style>
   <% end %>
 
+  <% if !@page.text_color.empty? %>
+    <style>
+      .adaptive {
+        color: <%= @page.text_color %> !important;
+      }
+    </style>
+  <% end %>
+
     <script>
     if ((typeof current_pet == 'undefined') || current_pet != '<%= @page.url %>') {
       <% if !@page.noises.empty? %>
@@ -70,14 +78,5 @@
 
     </script>
 
-  <script>
-  BackgroundCheck.init({
-      targets: '.adaptive',
-      images: 'body'
-  });
-  document.addEventListener("turbolinks:load", function() {
-    BackgroundCheck.refresh();
-  });
-  </script>
 
 </div>

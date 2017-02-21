@@ -45,6 +45,10 @@ gem 'friendly_id'
 
 gem 'cocoon'
 
+gem 'jquery-minicolors-rails'
+
+gem 'bootstrap_form'
+
 gem 'slack-notifier'
 
 group :development, :test do
