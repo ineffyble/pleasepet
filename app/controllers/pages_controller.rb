@@ -57,7 +57,7 @@ class PagesController < ApplicationController
     #   })
     # end
     respond_to do |format|
-      format.json { render json: { count: @page.pet.received_pettings.count } }
+      format.json { render json: { count: @page.pet.received_pettings.size } }
     end
   end
 
