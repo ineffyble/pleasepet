@@ -1,11 +1,6 @@
 class NoisesController < ApplicationController
   before_action :set_noise, only: [:show, :edit, :update, :destroy]
-
-  # GET /noises
-  # GET /noises.json
-  def index
-    @noises = Noise.all
-  end
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
 
   # GET /noises/1
   # GET /noises/1.json
@@ -70,4 +65,11 @@ class NoisesController < ApplicationController
   def noise_params
     params.require(:noise).permit(:sound)
   end
+
+  def verify_pet
+    if current_pet != @noise.pet
+      redirect_to root_path
+    end
+  end
+
 end

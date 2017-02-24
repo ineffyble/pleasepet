@@ -1,0 +1,1 @@
+json.array! @pet_interactions, partial: 'pet_interactions/pet_interaction', as: :pet_interaction

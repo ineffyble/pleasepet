@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Your petters</h1>
+
+    <ul class="list-group">
+      <% @petters.each do |petter| %>
+          <li class="list-group-item">
+            <% if petter.petter %>
+                <%= link_to petter.petter.name, petter.petter.page.url %>
+            <% else %>
+                Anonymous
+            <% end %>
+            <span class="badge"><%= petter.total_pettings %></span>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h1>Your petted pets</h1>
+    <ul class="list-group">
+      <% @petted.each do |petted| %>
+          <li class="list-group-item">
+            <%= link_to petted.petted.name, petted.petted.page.url %>
+            <span class="badge"><%= petted.total_pettings %></span>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

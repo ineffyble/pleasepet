@@ -1,0 +1,1 @@
+json.partial! "pet_interactions/pet_interaction", pet_interaction: @pet_interaction

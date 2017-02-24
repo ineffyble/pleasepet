@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pet_interactions
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -9,11 +10,11 @@ Rails.application.routes.draw do
 
   get '/naptime' => 'index#naptime'
 
-  resources :pettings, only: [:index]
+  get '/pettings' => 'pet_interactions#index'
   resources :pages, path: '', only: [:show, :update], param: :url
   resources :pages, only: [:edit], param: :url
-  post '/:url/pet' => 'pages#pet'
-  get '/:url/pets' => 'pages#pets'
+  post '/:url/petting'  => 'pet_interactions#do_a_petting'
+  get '/:url/pettings' => 'pet_interactions#how_many_pettings'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

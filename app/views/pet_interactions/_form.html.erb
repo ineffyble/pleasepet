@@ -1,0 +1,42 @@
+<%= form_for(pet_interaction) do |f| %>
+  <% if pet_interaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pet_interaction.errors.count, "error") %> prohibited this pet_interaction from being saved:</h2>
+
+      <ul>
+      <% pet_interaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :petter_id %>
+    <%= f.number_field :petter_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :petted_id %>
+    <%= f.number_field :petted_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_pettings %>
+    <%= f.number_field :total_pettings %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_petting %>
+    <%= f.datetime_select :first_petting %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_petting %>
+    <%= f.datetime_select :last_petting %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

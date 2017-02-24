@@ -9,7 +9,7 @@ function getPets() {
   // var latest_petting = $(".petting").first().attr('data-petting-id');
 
   $.ajax({
-    url: '/' + page_url + '/pets',
+    url: '/' + page_url + '/pettings',
     dataType: 'json',
     contentType: 'application/json',
     success: function(pettings) {
@@ -69,7 +69,7 @@ function pet() {
   queued_petting_count = queued_petting_count + 1;
 
   if (!(send_pettings_timer)) {
-    send_pettings_timer = setTimeout(sendPets, 5000);
+    send_pettings_timer = setTimeout(sendPets, 1000);
     send_pettings_timer = true;
   }
 
@@ -85,11 +85,11 @@ function sendPets() {
   var page_url = $("#pet").data('page-url');
 
   $.ajax({
-    url: '/' + page_url + '/pet',
+    url: '/' + page_url + '/petting',
     method: 'POST',
     dataType: 'json',
     contentType: 'application/json',
-    data: JSON.stringify({ quantity: queued_petting_count }),
+    data: JSON.stringify({ this_many: queued_petting_count }),
     success: function(data) {
       // var newPetting = document.createElement("div");
       // newPetting.className = "col-md-4 petting";
@@ -118,7 +118,20 @@ function sendPets() {
       // var petCount = parseInt($("#petcount").text());
       // petCount = petCount + 1;
       // $("#petcount").text(petCount);
-    }
+    },
+      statusCode: {
+        429: function() {
+            $("#fourtwonine").dialog({
+                modal: true,
+                width: 500,
+                buttons: {
+                    "Mew :(": function() {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        }
+      }
   });
   queued_petting_count = 0;
   send_pettings_timer = false;

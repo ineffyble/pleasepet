@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Petter:</strong>
+  <%= @pet_interaction.petter_id %>
+</p>
+
+<p>
+  <strong>Petted:</strong>
+  <%= @pet_interaction.petted_id %>
+</p>
+
+<p>
+  <strong>Total pettings:</strong>
+  <%= @pet_interaction.total_pettings %>
+</p>
+
+<p>
+  <strong>First petting:</strong>
+  <%= @pet_interaction.first_petting %>
+</p>
+
+<p>
+  <strong>Last petting:</strong>
+  <%= @pet_interaction.last_petting %>
+</p>
+
+<%= link_to 'Edit', edit_pet_interaction_path(@pet_interaction) %> |
+<%= link_to 'Back', pet_interactions_path %>

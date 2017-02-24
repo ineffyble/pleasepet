@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221153509) do
+ActiveRecord::Schema.define(version: 20170224100248) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -39,34 +39,47 @@ ActiveRecord::Schema.define(version: 20170221153509) do
     t.integer  "pet_id"
     t.string   "url"
     t.string   "name"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "background_file_name"
     t.string   "background_content_type"
     t.integer  "background_file_size"
     t.datetime "background_updated_at"
     t.string   "text_color"
+    t.integer  "show_petters",            default: 0,    null: false
+    t.boolean  "allow_anon_petting",      default: true, null: false
     t.index ["pet_id"], name: "index_pages_on_pet_id"
     t.index ["url"], name: "index_pages_on_url"
   end
 
+  create_table "pet_interactions", force: :cascade do |t|
+    t.integer  "petter_id"
+    t.integer  "petted_id"
+    t.integer  "total_pettings"
+    t.datetime "first_petting"
+    t.datetime "last_petting"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "pets", force: :cascade do |t|
-    t.string   "email",                    default: "", null: false
-    t.string   "encrypted_password",       default: "", null: false
+    t.string   "email",                    default: "",   null: false
+    t.string   "encrypted_password",       default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            default: 0,  null: false
+    t.integer  "sign_in_count",            default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "page_id"
     t.string   "name"
     t.integer  "received_pettings_count"
     t.integer  "performed_pettings_count"
+    t.boolean  "allow_anon_petting",       default: true, null: false
     t.index ["email"], name: "index_pets_on_email", unique: true
     t.index ["reset_password_token"], name: "index_pets_on_reset_password_token", unique: true
   end
