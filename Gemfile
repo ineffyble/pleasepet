@@ -46,6 +46,10 @@ gem 'friendly_id'
 gem 'cocoon'
 
 gem 'jquery-minicolors-rails'
+gem 'jquery-ui-rails'
+gem 'rack-attack'
+
+gem 'dotenv-rails'
 
 gem 'bootstrap_form'
 

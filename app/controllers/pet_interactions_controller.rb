@@ -18,9 +18,11 @@ class PetInteractionsController < ApplicationController
     pet_interaction.increment(:total_pettings, params[:this_many])
     pet_interaction.last_petting = DateTime.now.utc
     pet_interaction.save!
-    @pet.increment(:received_pettings_count, params[:this_many]).save!
+    @pet.received_pettings_count = @pet.received_pettings_count + params[:this_many]
+    @pet.save!
     if current_pet
-      current_pet.increment(:performed_pettings_count, params[:this_many]).save!
+      current_pet.performed_pettings_count = current_pet.performed_pettings_count + params[:this_many]
+      current_pet.save!
     end
   end
 

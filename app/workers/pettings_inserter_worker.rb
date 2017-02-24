@@ -10,6 +10,12 @@ class PettingsInserterWorker
     if pet_interaction.first_petting.nil?
       pet_interaction.first_petting = petted_at
     end
+    if pet_interaction.first_petting > petted_at
+           pet_interaction.first_petting = petted_at
+    end
+    if pet_interaction.last_petting.nil?
+      pet_interaction.last_petting = petted_at
+    end
     if pet_interaction.last_petting < petted_at
       pet_interaction.last_petting = petted_at
     end
@@ -19,6 +25,7 @@ class PettingsInserterWorker
     pet.increment(:received_pettings_count, 1).save!
     if petter_id
       petter = Pet.find(petter_id)
-      pettert.increment(:performed_pettings_count, 1).save!
+      petter.increment(:performed_pettings_count, 1).save!
     end
+  end
 end
