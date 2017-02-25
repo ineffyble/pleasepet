@@ -24,3 +24,5 @@
 /public/system
 
 .idea/
+
+.env
