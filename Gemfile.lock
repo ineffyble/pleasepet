@@ -158,6 +158,8 @@ GEM
       redis (>= 3.0.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rollbar (2.14.0)
+      multi_json
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -229,6 +231,7 @@ DEPENDENCIES
   rails (~> 5.0.1)
   redis (~> 3.0)
   redis-objects
+  rollbar
   sass-rails (~> 5.0)
   sidekiq
   slack-notifier
