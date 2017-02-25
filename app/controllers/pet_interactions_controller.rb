@@ -18,10 +18,10 @@ class PetInteractionsController < ApplicationController
     pet_interaction.increment(:total_pettings, params[:this_many])
     pet_interaction.last_petting = DateTime.now.utc
     pet_interaction.save!
-    @pet.received_pettings_count = @pet.received_pettings_count + params[:this_many]
+    @pet.increment(:received_pettings_count, params[:this_many])
     @pet.save!
     if current_pet
-      current_pet.performed_pettings_count = current_pet.performed_pettings_count + params[:this_many]
+      current_pet.increment(:performed_pettings_count, params[:this_many])
       current_pet.save!
     end
   end
@@ -57,6 +57,10 @@ class PetInteractionsController < ApplicationController
       if params[:this_many] > 17
         # 18 is too many pettings
         render status: :too_many_requests, inline: '<img src="//http.cat/429">'
+      end
+      if params[:this_many] < 0
+        # No negative petting!
+        render status: :bad_request, inline: '<img src="//http.cat/400">'
       end
     end
 
