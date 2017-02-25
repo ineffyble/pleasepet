@@ -1,24 +1,16 @@
-# README
+# PleasePet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[PleasePet](https://please.pet) is a web app for petting pets online.
 
-Things you may want to cover:
+This project is in the process of being cleaned up, as it has been hastily redeveloped to cope with increased capacity.
 
-* Ruby version
+### Technologies
+* Ruby
+* Rails
+* Postgresql
+* Sidekiq
+* Bootstrap
+* jQuery
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Contributing
+Pull requests are very welcome and encouraged.
