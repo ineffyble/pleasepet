@@ -21,6 +21,7 @@
 .byebug_history
 
 /public/system/
+/public/assets/
 
 .idea/
 
