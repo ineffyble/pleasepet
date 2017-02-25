@@ -4,90 +4,88 @@
     <h1 class="adaptive">Please pet <%= pet_name %></h1>
     <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet.received_pettings_count || 0 %></span> times.</h2>
     <% if @page.allow_anon_petting? %>
-      <input type="submit" class="btn btn-primary btn-lg" value="Pet <%= pet_name %>" onClick="pet()">
+        <input type="submit" class="btn btn-primary btn-lg" value="Pet <%= pet_name %>" onClick="pet()">
     <% else %>
         <input type="submit" class="btn btn-primary btn-lg" value="Login to pet <%= pet_name %>" disabled="disabled">
     <% end %>
   </div>
 
   <% if @page.show_petters >= 1 %>
-    <div class="row">
-      <div class="col-md-12">
-        <h2 class="adaptive">Recent petters</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="adaptive">Recent petters</h2>
+        </div>
       </div>
-    </div>
-    <div class="row" id="pettings">
+      <div class="row" id="pettings">
         <% @page.pet.received_pettings.sort_by(&:last_petting).reverse.first(6).each do |petting| %>
-          <div class="col-md-4 petting">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-            <% if petting.petter %>
-              <h3 class="panel-title" style="font-size: 2.5em;"><a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
-            <% else %>
-              <h3 class="panel-title" style="font-size: 2.5em">Anonymous petters</h3>
-            <% end %>
+            <div class="col-md-4 petting">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <% if petting.petter %>
+                      <h3 class="panel-title" style="font-size: 2.5em;"><a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
+                  <% else %>
+                      <h3 class="panel-title" style="font-size: 2.5em">Anonymous petters</h3>
+                  <% end %>
+                </div>
+                <div class="panel-body">
+                  <h2><span class="label label-default"><%= time_ago_in_words(petting.last_petting) %> ago</span></h2>
+                  <h2><% if @page.show_petters == 2 %><span class="label label-default"><%= petting.total_pettings %> pettings</span><% end %>
+                  </h2>
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-              <h2><span class="label label-default"><%= time_ago_in_words(petting.last_petting) %> ago</span></h2>
-                <h2><% if @page.show_petters == 2 %><span class="label label-default"><%= petting.total_pettings %> pettings</span><% end %>
-                </h2>
-            </div>
-          </div>
-          </div>
         <% end %>
-    </div>
+      </div>
   <% end %>
 
   <% if @page.background.exists? %>
-    <style>
-      body {
-        background-image: url(<%= @page.background.url %>);
-        background-size: cover;
-        background-position: center;
-      }
-    </style>
+      <style>
+        body {
+          background-image: url(<%= @page.background.url %>);
+          background-size: cover;
+          background-position: center;
+        }
+      </style>
   <% else %>
-    <style>
-      body {
-        background-image: url('/backgrounds/original/missing.png');
-        background-repeat: repeat;
-      }
-    </style>
+      <style>
+        body {
+          background-image: url('/backgrounds/original/missing.png');
+          background-repeat: repeat;
+        }
+      </style>
   <% end %>
 
-  <% if !@page.text_color.nil? %>
-    <style>
-      .adaptive {
-        color: <%= @page.text_color %> !important;
-      }
-    </style>
+  <% unless @page.text_color.nil? %>
+      <style>
+        .adaptive {
+          color: <%= @page.text_color %> !important;
+        }
+      </style>
   <% end %>
 
-    <script>
-    if ((typeof current_pet == 'undefined') || current_pet != '<%= @page.url %>') {
-      <% if !@page.noises.empty? %>
-      var noises = [
-        <% @page.noises.each do |n| %>
-          new Audio("<%= n.sound.url %>"),
-        <% end %>
-      ];
+  <script>
+      if ((typeof current_pet == 'undefined') || current_pet != '<%= @page.url %>') {
+          <% if !@page.noises.empty? %>
+          var noises = [
+              <% @page.noises.each do |n| %>
+              new Audio("<%= n.sound.url %>"),
+              <% end %>
+          ];
 
+          function makeNoise() {
+              noises[Math.floor(Math.random()*noises.length)].play();
+          }
+      }
+
+      <% else %>
       function makeNoise() {
-        noises[Math.floor(Math.random()*noises.length)].play();
-      };
-    }
+          console.log("Mew :("); // The poor pet with no noises mews in console instead
+      }
+      <% end %>
 
-    <% else %>
-    function makeNoise() {
-      console.log("Mew :("); // The poor pet with no noises mews in console instead
-    }
+      var current_pet = '<%= @page.url %>';
 
-    }
-    <% end %>
-
-    var current_pet = '<%= @page.url %>';
-
-    </script>
+  </script>
 
 
 </div>

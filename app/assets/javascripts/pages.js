@@ -64,12 +64,10 @@ function pet() {
   pettings_count = pettings_count + 1;
   $("#petcount").text(pettings_count);
 
-  var page_url = $("#pet").data('page-url');
-
   queued_petting_count = queued_petting_count + 1;
 
   if (!(send_pettings_timer)) {
-    send_pettings_timer = setTimeout(sendPets, 1000);
+    setTimeout(sendPets, 1000);
     send_pettings_timer = true;
   }
 

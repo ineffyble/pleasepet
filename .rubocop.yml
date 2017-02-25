@@ -1,9 +1,88 @@
 inherit_from: .rubocop_todo.yml
+Rails:
+  Enabled: true
+
+Style/PerlBackrefs:
+  AutoCorrect: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Max: 2
+
+Metrics/LineLength:
+  AllowURI: true
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 10
+
+Metrics/AbcSize:
+  Max: 100
+
+Metrics/BlockNesting:
+  Max: 3
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 200
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/MethodLength:
+  Max: 55
+
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 200
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/ParameterLists:
+  Max: 4
+  CountKeywordArgs: true
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: indent
+
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    find_all: 'select'
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: true
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: 'comma'
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
 AllCops:
-  Include:
-    - Rakefile
-    - config.ru
-    - lib/**/*.rake
+  TargetRubyVersion: 2.4
   Exclude:
-    - db/schema.rb
-    - db/migrate/*.rb
+  - 'spec/**/*'
+  - 'db/**/*'
+  - 'app/views/**/*'
+  - 'config/**/*'
+  - 'bin/*'
+  - 'Rakefile'
+  - 'node_modules/**/*'
+  - 'Vagrantfile'

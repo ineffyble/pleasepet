@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Output of rails_best_practices</title>
+    <style type="text/css">
+      body {
+        color: #333;
+        background: #eee;
+        padding: 0 20px;
+      }
+      h1 {
+        color: ##4E4E4E;
+      }
+      p {
+        margin: 5px 0;
+      }
+      table {
+        background: white;
+        border: 1px solid #666;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      table.result th, table.result td {
+        padding: 4px;
+        border: 1px solid #D0D0D0;
+      }
+      table.result th {
+        background-color: #DFC;
+        color: #337022;
+      }
+      table.result td.filename {
+        color: #ED1556;
+      }
+      table.result tr:hover {
+        background-color: #FFFFC0;
+      }
+      ul {
+        clear: both;
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+      }
+      ul li {
+       list-style: none;
+       display: none;
+       float: left;
+      }
+      .result tbody tr{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>rails_best_practices output</h1>
+    <p>
+      Please go to
+      <a href='http://rails-bestpractices.com' target='_blank'>http://rails-bestpractices.com</a>
+      to see more useful Rails Best Practices.
+    </p>
+    <p>
+        Found 28 warnings.
+    </p>
+    <table>
+          <tr>
+              <td>
+                <input type="checkbox" class="error-type" id="AlwaysAddDbIndexReview" value="AlwaysAddDbIndexReview"
+                />&nbsp;<label for="AlwaysAddDbIndexReview">Always Add Db Index</label>
+              </td>
+              <td>
+                <input type="checkbox" class="error-type" id="MoveModelLogicIntoModelReview" value="MoveModelLogicIntoModelReview"
+                />&nbsp;<label for="MoveModelLogicIntoModelReview">Move Model Logic Into Model</label>
+              </td>
+              <td>
+                <input type="checkbox" class="error-type" id="UseQueryAttributeReview" value="UseQueryAttributeReview"
+                />&nbsp;<label for="UseQueryAttributeReview">Use Query Attribute</label>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                <input type="checkbox" class="error-type" id="LawOfDemeterReview" value="LawOfDemeterReview"
+                />&nbsp;<label for="LawOfDemeterReview">Law Of Demeter</label>
+              </td>
+              <td>
+                <input type="checkbox" class="error-type" id="NotUseTimeAgoInWordsReview" value="NotUseTimeAgoInWordsReview"
+                />&nbsp;<label for="NotUseTimeAgoInWordsReview">Not Use Time Ago In Words</label>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                <input type="checkbox" class="error-type" id="MoveCodeIntoControllerReview" value="MoveCodeIntoControllerReview"
+                />&nbsp;<label for="MoveCodeIntoControllerReview">Move Code Into Controller</label>
+              </td>
+              <td>
+                <input type="checkbox" class="error-type" id="RemoveUnusedMethodsInControllersReview" value="RemoveUnusedMethodsInControllersReview"
+                />&nbsp;<label for="RemoveUnusedMethodsInControllersReview">Remove Unused Methods In Controllers</label>
+              </td>
+          </tr>
+        <tr>
+          <td colspan="3">
+            <button id="show-all">Check all</button>
+            <button id="show-none">Uncheck all</button>
+          </td>
+        </tr>
+    </table>
+    <table class="result">
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Line Number</th>
+          <th>Warning Message</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="AlwaysAddDbIndexReview">
+            <td class='filename'>
+                db/schema.rb
+            </td>
+            <td class='line'>55</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/always-add-db-index/' target='_blank'>always add db index (pet_interactions => [petter_id])</a>
+            </td>
+          </tr>
+          <tr class="AlwaysAddDbIndexReview">
+            <td class='filename'>
+                db/schema.rb
+            </td>
+            <td class='line'>55</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/always-add-db-index/' target='_blank'>always add db index (pet_interactions => [petted_id])</a>
+            </td>
+          </tr>
+          <tr class="AlwaysAddDbIndexReview">
+            <td class='filename'>
+                db/schema.rb
+            </td>
+            <td class='line'>65</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/always-add-db-index/' target='_blank'>always add db index (pets => [page_id])</a>
+            </td>
+          </tr>
+          <tr class="LawOfDemeterReview">
+            <td class='filename'>
+                app/views/pages/show.html.erb
+            </td>
+            <td class='line'>1</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/the-law-of-demeter/' target='_blank'>law of demeter</a>
+            </td>
+          </tr>
+          <tr class="LawOfDemeterReview">
+            <td class='filename'>
+                app/views/pages/show.html.erb
+            </td>
+            <td class='line'>5</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/the-law-of-demeter/' target='_blank'>law of demeter</a>
+            </td>
+          </tr>
+          <tr class="LawOfDemeterReview">
+            <td class='filename'>
+                app/views/pages/show.html.erb
+            </td>
+            <td class='line'>25</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/the-law-of-demeter/' target='_blank'>law of demeter</a>
+            </td>
+          </tr>
+          <tr class="LawOfDemeterReview">
+            <td class='filename'>
+                app/views/pettings/index.html.erb
+            </td>
+            <td class='line'>11</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/the-law-of-demeter/' target='_blank'>law of demeter</a>
+            </td>
+          </tr>
+          <tr class="LawOfDemeterReview">
+            <td class='filename'>
+                app/views/pettings/index.html.erb
+            </td>
+            <td class='line'>26</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/the-law-of-demeter/' target='_blank'>law of demeter</a>
+            </td>
+          </tr>
+          <tr class="MoveCodeIntoControllerReview">
+            <td class='filename'>
+                app/views/pettings/index.html.erb
+            </td>
+            <td class='line'>10</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/move-code-into-controller/' target='_blank'>move code into controller</a>
+            </td>
+          </tr>
+          <tr class="MoveCodeIntoControllerReview">
+            <td class='filename'>
+                app/views/pettings/index.html.erb
+            </td>
+            <td class='line'>10</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/move-code-into-controller/' target='_blank'>move code into controller</a>
+            </td>
+          </tr>
+          <tr class="MoveCodeIntoControllerReview">
+            <td class='filename'>
+                app/views/pettings/index.html.erb
+            </td>
+            <td class='line'>25</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/move-code-into-controller/' target='_blank'>move code into controller</a>
+            </td>
+          </tr>
+          <tr class="MoveCodeIntoControllerReview">
+            <td class='filename'>
+                app/views/pettings/index.html.erb
+            </td>
+            <td class='line'>25</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/24/move-code-into-controller/' target='_blank'>move code into controller</a>
+            </td>
+          </tr>
+          <tr class="MoveModelLogicIntoModelReview">
+            <td class='filename'>
+                app/controllers/pet_interactions_controller.rb
+            </td>
+            <td class='line'>87</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/07/21/move-model-logic-into-the-model/' target='_blank'>move model logic into model (@pet_interaction use_count > 4)</a>
+            </td>
+          </tr>
+          <tr class="NotUseTimeAgoInWordsReview">
+            <td class='filename'>
+                app/views/pages/show.html.erb
+            </td>
+            <td class='line'>31</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2012/02/10/not-use-time_ago_in_words/' target='_blank'>not use time_ago_in_words</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/application_controller.rb
+            </td>
+            <td class='line'>4</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (ApplicationController#after_sign_in_path_for)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/noises_controller.rb
+            </td>
+            <td class='line'>19</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (NoisesController#create)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/noises_controller.rb
+            </td>
+            <td class='line'>69</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (NoisesController#verify_pet)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/pet_interactions_controller.rb
+            </td>
+            <td class='line'>82</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (PetInteractionsController#increment_total_pettings)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/pettings_controller.rb
+            </td>
+            <td class='line'>26</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (PettingsController#create)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/registrations_controller.rb
+            </td>
+            <td class='line'>10</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (RegistrationsController#sign_up_params)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/registrations_controller.rb
+            </td>
+            <td class='line'>15</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (RegistrationsController#account_update_params)</a>
+            </td>
+          </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/registrations_controller.rb
+            </td>
+            <td class='line'>20</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (RegistrationsController#after_sign_up_path_for)</a>
+            </td>
+          </tr>
+          <tr class="UseQueryAttributeReview">
+            <td class='filename'>
+                app/controllers/pet_interactions_controller.rb
+            </td>
+            <td class='line'>92</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/10/03/use-query-attribute/' target='_blank'>use query attribute (@pet_interaction.last_petting?)</a>
+            </td>
+          </tr>
+          <tr class="UseQueryAttributeReview">
+            <td class='filename'>
+                app/workers/pettings_inserter_worker.rb
+            </td>
+            <td class='line'>13</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/10/03/use-query-attribute/' target='_blank'>use query attribute (pet_interaction.first_petting?)</a>
+            </td>
+          </tr>
+          <tr class="UseQueryAttributeReview">
+            <td class='filename'>
+                app/workers/pettings_inserter_worker.rb
+            </td>
+            <td class='line'>19</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/10/03/use-query-attribute/' target='_blank'>use query attribute (pet_interaction.last_petting?)</a>
+            </td>
+          </tr>
+          <tr class="UseQueryAttributeReview">
+            <td class='filename'>
+                app/views/pages/show.html.erb
+            </td>
+            <td class='line'>58</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/10/03/use-query-attribute/' target='_blank'>use query attribute (@page.text_color?)</a>
+            </td>
+          </tr>
+          <tr class="UseQueryAttributeReview">
+            <td class='filename'>
+                lib/tasks/pettings.rake
+            </td>
+            <td class='line'>17</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/10/03/use-query-attribute/' target='_blank'>use query attribute (pet_interaction.first_petting?)</a>
+            </td>
+          </tr>
+          <tr class="UseQueryAttributeReview">
+            <td class='filename'>
+                lib/tasks/pettings.rake
+            </td>
+            <td class='line'>23</td>
+            <td class='message'>
+              <a href='http://rails-bestpractices.com/posts/2010/10/03/use-query-attribute/' target='_blank'>use query attribute (pet_interaction.last_petting?)</a>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+
+        keys = location.hash.slice(2).split("|");
+        keys = keys.filter(function(item){
+          return item != "";
+        });
+        keys.forEach(function(item){
+          $('.'+item).show();
+          $('input.error-type#'+item+'[type=checkbox]').prop('checked', true);
+        });
+
+        $('input.error-type[type=checkbox]').click(function() {
+          if ($(this).attr('checked')) {
+            $(this).prop('checked', true);
+            $('.'+$(this).val()).show();
+
+            new_hash = location.hash.replace("|"+$(this).val().toString(), "");
+            location.hash = new_hash+"|"+$(this).val();
+          } else {
+            $(this).prop('checked', false);
+            $('.'+$(this).val()).hide();
+
+            new_hash = location.hash.replace("|"+$(this).val().toString(), "");
+            location.hash = new_hash
+          }
+        });
+
+        $('#show-all').click(function() {
+          $('input.error-type[type=checkbox]').each(function(index, item){
+            new_hash = location.hash.replace("|"+$(item).val().toString(), "");
+            location.hash = new_hash+"|"+$(item).val();
+          });
+          $('input.error-type[type=checkbox]').prop('checked', true);
+          $('table.result tbody tr').show();
+        });
+
+        $('#show-none').click(function() {
+          $('input.error-type[type=checkbox]').prop('checked', false);
+          $('table.result tbody tr').hide();
+          location.hash = "";
+        });
+      });
+    </script>
+  </body>
+</html>

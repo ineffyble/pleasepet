@@ -1,5 +1,5 @@
 class Page < ApplicationRecord
-  VALID_URL_REGEX = /\A[\_\-a-zA-Z0-9]+\z/
+  VALID_URL_REGEX = /\A[_\-a-zA-Z0-9]+\z/
   validates :url, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_URL_REGEX }
 
   validates :text_color, allow_blank: true, css_hex_color: true
@@ -10,7 +10,7 @@ class Page < ApplicationRecord
   has_attached_file :background
   validates_attachment_content_type :background, content_type: /\Aimage\/.*\z/
 
-  accepts_nested_attributes_for :noises, reject_if: :all_blank, allow_destroy: :rue
+  accepts_nested_attributes_for :noises, reject_if: :all_blank, allow_destroy: true
 
   before_save { self.url = url.downcase }
 

@@ -1,9 +1,12 @@
 class PettingsInserterWorker
+  # Legacy worker for dealing with pettings backlog
   include Sidekiq::Worker
 
   def perform(petted_at, petted_id, petter_id)
     if petter_id
       pet_interaction = PetInteraction.find_or_create_by(petter_id: petter_id, petted_id: petted_id)
+      petter = Pet.find(petter_id)
+      petter.increment(:performed_pettings_count, 1).save!
     else
       pet_interaction = PetInteraction.find_or_create_by(petter_id: false, petted_id: petted_id)
     end
@@ -23,9 +26,5 @@ class PettingsInserterWorker
     pet_interaction.save!
     pet = Pet.find(petted_id)
     pet.increment(:received_pettings_count, 1).save!
-    if petter_id
-      petter = Pet.find(petter_id)
-      petter.increment(:performed_pettings_count, 1).save!
-    end
   end
 end

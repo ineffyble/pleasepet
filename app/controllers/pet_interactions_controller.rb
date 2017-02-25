@@ -1,29 +1,20 @@
 class PetInteractionsController < ApplicationController
-  before_action :set_pet_interactions, only: [:index]
+  # Find appropriate records
+  before_action :set_pet_interactions_for_pet, only: [:index]
   before_action :set_page_and_pet, only: [:do_a_petting, :how_many_pettings]
+  before_action :set_pet_interaction, only: [:do_a_petting]
+  # Verify legitimacy of incoming petting parameters
   before_action :not_too_many_pettings, only: [:do_a_petting]
   before_action :only_wanted_pettings, only: [:do_a_petting]
 
   def index; end
 
   def do_a_petting
+    increment_pet_pettings(@pet, 'received', params[:this_many])
     if current_pet
-      pet_interaction = PetInteraction.find_or_create_by(petter_id: current_pet.id, petted_id: @pet.id)
-    else
-      pet_interaction = PetInteraction.find_or_create_by(petter_id: false, petted_id: @pet.id)
+      increment_pet_pettings(current_pet, 'performed', params[:this_many])
     end
-    if pet_interaction.first_petting.nil?
-      pet_interaction.first_petting = DateTime.now.utc
-    end
-    pet_interaction.increment(:total_pettings, params[:this_many])
-    pet_interaction.last_petting = DateTime.now.utc
-    pet_interaction.save!
-    @pet.increment(:received_pettings_count, params[:this_many])
-    @pet.save!
-    if current_pet
-      current_pet.increment(:performed_pettings_count, params[:this_many])
-      current_pet.save!
-    end
+    set_interaction_dates
   end
 
   def how_many_pettings
@@ -39,34 +30,68 @@ class PetInteractionsController < ApplicationController
   end
 
   private
-    def set_pet_interactions
-      @petters = PetInteraction.where("petted_id=?", current_pet.id)
-      @petted = PetInteraction.where("petter_id=?", current_pet.id)
-    end
 
-    def set_page_and_pet
-      params[:url].downcase!
-      @page = Page.find_by! url: params[:url]
-      @pet = @page.pet
-    end
+  def set_pet_interactions_for_pet
+    @petters = PetInteraction.where("petted_id=?", current_pet.id)
+    @petted = PetInteraction.where("petter_id=?", current_pet.id)
+  end
 
-    def not_too_many_pettings
-      if params[:this_many].nil?
-        params[:this_many] = 1
-      end
-      if params[:this_many] > 17
-        # 18 is too many pettings
-        render status: :too_many_requests, inline: '<img src="//http.cat/429">'
-      end
-      if params[:this_many] < 0
-        # No negative petting!
-        render status: :bad_request, inline: '<img src="//http.cat/400">'
-      end
+  def set_pet_interaction
+    if current_pet
+      @pet_interaction = PetInteraction.find_or_create_by(petter_id: current_pet.id, petted_id: @pet.id)
+    else
+      @pet_interaction = PetInteraction.find_or_create_by(petter_id: false, petted_id: @pet.id)
     end
+  end
 
-    def only_wanted_pettings
-      unless @page.allow_anon_petting
-        render status: :unauthorized, inline: '<img src="//http.cat/401">'
-      end
+  def set_page_and_pet
+    params[:url].downcase!
+    @page = Page.find_by! url: params[:url]
+    @pet = @page.pet
+  end
+
+  def not_too_many_pettings
+    if params[:this_many].nil?
+      params[:this_many] = 1
     end
+    if params[:this_many] > 17
+      # 18 is too many pettings
+      render status: :too_many_requests, inline: '<img src="//http.cat/429">'
+    end
+    if params[:this_many] < 0
+      # No negative petting!
+      render status: :bad_request, inline: '<img src="//http.cat/400">'
+    end
+  end
+
+  def only_wanted_pettings
+    unless @page.allow_anon_petting
+      render status: :unauthorized, inline: '<img src="//http.cat/401">'
+    end
+  end
+
+  def increment_pet_pettings(pet, counter_type, amount)
+    if counter_type == 'performed'
+      pet.increment(:performed_pettings_count, amount)
+    else
+      pet.increment(:received_pettings_count, amount)
+    end
+    pet.save!
+  end
+
+  def increment_total_pettings(amount)
+    @pet_interaction.increment(:total_pettings, amount)
+    @pet_interaction.save!
+  end
+
+  def set_interaction_dates
+    now = DateTime.now.utc
+    if @et_interaction.first_petting.nil?
+      @pet_interaction.first_petting = now
+    end
+    if @pet_interaction.last_petting.nil? || @pet_interaction.last_petting < now
+      @pet_interaction.last_petting = now
+    end
+    @pet_interaction.save!
+  end
 end

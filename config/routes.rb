@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  resources :pet_interactions
+  # Sidekiq dashboard
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-
+  # Root index
   root 'index#view'
+  # Login/logout pages
   devise_for :pets, controllers: { registrations: 'registrations' }
-
+  # Custom redirects and routes
   get '/evelyn' => redirect("http://evelyn.pet")
-
   get '/naptime' => 'index#naptime'
-
+  # Pettings
   get '/pettings' => 'pet_interactions#index'
-  resources :pages, path: '', only: [:show, :update], param: :url
-  resources :pages, only: [:edit], param: :url
   post '/:url/petting'  => 'pet_interactions#do_a_petting'
   get '/:url/pettings' => 'pet_interactions#how_many_pettings'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # Pet pages
+  resources :pages, only: [:edit], param: :url
+  # View pet pages at root URL
+  resources :pages, path: '', only: [:show, :update], param: :url
 end

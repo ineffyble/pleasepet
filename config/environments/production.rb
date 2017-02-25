@@ -91,5 +91,5 @@ Rails.application.configure do
    ENV['REDIS_HOST'] = redis_url.host
    ENV['REDIS_PORT'] = redis_url.port.to_s
    ENV['REDIS_PASSWORD'] = redis_url.password
- end
+  end
 end
