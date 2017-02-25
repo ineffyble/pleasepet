@@ -65,7 +65,7 @@ class PetInteractionsController < ApplicationController
   end
 
   def only_wanted_pettings
-    unless @page.allow_anon_petting
+    unless current_pet || @page.allow_anon_petting
       render status: :unauthorized, inline: '<img src="//http.cat/401">'
     end
   end

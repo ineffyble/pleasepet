@@ -27,7 +27,8 @@ gem "paperclip", "~> 5.0.0"
 gem 'cocoon'
 # Rack-attack for rate limiting
 gem 'rack-attack'
-
+# Use Mailgun for email delivery
+gem 'mailgun_rails'
 
 ## Front end components
 # Use SCSS for stylesheets
