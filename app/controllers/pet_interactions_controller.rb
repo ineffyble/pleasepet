@@ -14,6 +14,7 @@ class PetInteractionsController < ApplicationController
     if current_pet
       increment_pet_pettings(current_pet, 'performed', params[:this_many])
     end
+    increment_total_pettings(params[:this_many])
     set_interaction_dates
   end
 
@@ -86,10 +87,10 @@ class PetInteractionsController < ApplicationController
 
   def set_interaction_dates
     now = DateTime.now.utc
-    if @et_interaction.first_petting.nil?
+    unless @pet_interaction.first_petting?
       @pet_interaction.first_petting = now
     end
-    if @pet_interaction.last_petting.nil? || @pet_interaction.last_petting < now
+    unless @pet_interaction.last_petting? || @pet_interaction.last_petting < now
       @pet_interaction.last_petting = now
     end
     @pet_interaction.save!

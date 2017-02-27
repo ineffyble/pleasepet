@@ -1,8 +1,8 @@
-<% pet_name = @page.pet.name || @page.url %>
+<% pet_name = @page.pet_name || @page.url %>
 <div id="pet" data-page-url="<%= @page.url %>">
   <div class="jumbotron">
     <h1 class="adaptive">Please pet <%= pet_name %></h1>
-    <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet.received_pettings_count || 0 %></span> times.</h2>
+    <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet_received_pettings_count || 0 %></span> times.</h2>
     <% if @page.allow_anon_petting? || current_pet %>
         <input type="submit" class="btn btn-primary btn-lg" value="Pet <%= pet_name %>" onClick="pet()">
     <% else %>
@@ -22,7 +22,7 @@
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <% if petting.petter %>
-                      <h3 class="panel-title" style="font-size: 2.5em;"><a class="adaptive" href="/<%= petting.petter.page.url %>"><%= petting.petter.name %></a></h3>
+                      <h3 class="panel-title" style="font-size: 2.5em;"><a class="adaptive" href="/<%= petting.petter_page_url %>"><%= petting.petter_name %></a></h3>
                   <% else %>
                       <h3 class="panel-title" style="font-size: 2.5em">Anonymous petters</h3>
                   <% end %>
@@ -55,7 +55,7 @@
       </style>
   <% end %>
 
-  <% unless @page.text_color.nil? %>
+  <% if @page.text_color? %>
       <style>
         .adaptive {
           color: <%= @page.text_color %> !important;

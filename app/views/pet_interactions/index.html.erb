@@ -7,7 +7,7 @@
       <% @petters.each do |petter| %>
           <li class="list-group-item">
             <% if petter.petter %>
-                <%= link_to petter.petter.name, petter.petter.page.url %>
+                <%= link_to petter.petter_name, petter.petter_page_url %>
             <% else %>
                 Anonymous
             <% end %>
@@ -21,7 +21,7 @@
     <ul class="list-group">
       <% @petted.each do |petted| %>
           <li class="list-group-item">
-            <%= link_to petted.petted.name, petted.petted.page.url %>
+            <%= link_to petted.petted_name, petted.petted_page_url %>
             <span class="badge"><%= petted.total_pettings %></span>
           </li>
       <% end %>

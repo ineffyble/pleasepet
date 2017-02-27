@@ -9,4 +9,7 @@ class Pet < ApplicationRecord
   has_many :performed_pettings, class_name: 'PetInteraction', foreign_key: 'petter_id'
 
   accepts_nested_attributes_for :page
+
+  delegate :url, :to => :page, :prefix => true
+
 end

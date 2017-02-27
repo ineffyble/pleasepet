@@ -21,22 +21,6 @@ class PettingsController < ApplicationController
   # GET /pettings/1/edit
   def edit; end
 
-  # POST /pettings
-  # POST /pettings.json
-  def create
-    @petting = Petting.new(petting_params)
-
-    respond_to do |format|
-      if @petting.save
-        format.html { redirect_to @petting, notice: 'Petting was successfully created.' }
-        format.json { render :show, status: :created, location: @petting }
-      else
-        format.html { render :new }
-        format.json { render json: @petting.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /pettings/1
   # PATCH/PUT /pettings/1.json
   def update
