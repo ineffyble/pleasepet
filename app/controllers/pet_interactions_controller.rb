@@ -89,10 +89,10 @@ class PetInteractionsController < ApplicationController
 
   def set_interaction_dates(pet_interaction)
     now = DateTime.now.utc
-    unless pet_interaction.first_petting.nil?
+    if pet_interaction.first_petting.nil?
       pet_interaction.first_petting = now
     end
-    unless pet_interaction.last_petting? || pet_interaction.last_petting < now
+    unless pet_interaction.last_petting? && pet_interaction.last_petting < now
       pet_interaction.last_petting = now
     end
     pet_interaction.save!
