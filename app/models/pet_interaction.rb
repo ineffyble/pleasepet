@@ -1,7 +1,8 @@
 class PetInteraction < ApplicationRecord
   belongs_to  :petter,
               class_name: 'Pet',
-              inverse_of: :performed_pettings
+              inverse_of: :performed_pettings,
+              optional: true
 
   belongs_to  :petted,
               class_name: 'Pet',

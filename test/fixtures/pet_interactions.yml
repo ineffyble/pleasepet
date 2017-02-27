@@ -1,15 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  petter_id: 1
+anon_kitten:
+  petter_id: false
+  petted_id: 2
+  total_pettings: 5
+  first_petting: 2017-02-24 19:29:13
+  last_petting: 2017-02-24 19:29:13
+
+kitten_dog:
+  petter_id: 2
   petted_id: 1
   total_pettings: 1
   first_petting: 2017-02-24 19:29:13
   last_petting: 2017-02-24 19:29:13
 
-two:
-  petter_id: 1
-  petted_id: 1
-  total_pettings: 1
+anon_bun:
+  petter_id: false
+  petted_id: 4
+  total_pettings: 22
   first_petting: 2017-02-24 19:29:13
   last_petting: 2017-02-24 19:29:13

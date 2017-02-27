@@ -1,11 +1,27 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+dog:
+  id: 1
+  email: dog@email.com
+  encrypted_password: 4567554354
+  sign_in_count: 10
+  received_pettings_count: 1
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+kitten:
+  id: 2
+  email: kitten@email.com
+  encrypted_password: 4567554354
+  sign_in_count: 10
+  received_pettings_count: 5
+  performed_pettings_count: 1
+
+ferret:
+  id: 3
+  email: ferret@email.com
+  encrypted_password: 4567554354
+  sign_in_count: 10
+
+bun:
+  id: 4
+  email: bun@email.com
+  encrypted_password: 83483483845
+  sign_in_count: 12
+  received_pettings_count: 22

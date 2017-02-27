@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  pet_id: 1
-  url: MyString
-  name: MyString
+bun:
+  pet_id: 4
+  url: bun
+  name: Bun
+  allow_anon_petting: false
 
-two:
-  pet_id: 1
-  url: MyString
-  name: MyString
+kitten:
+  pet_id: 2
+  url: kitten
+  name: Kitten

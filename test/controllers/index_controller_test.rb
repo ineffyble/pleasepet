@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class IndexControllerTest < ActionDispatch::IntegrationTest
-  test "should get view" do
-    get index_view_url
+  test "should show index" do
+    get '/'
     assert_response :success
   end
 end
