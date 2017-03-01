@@ -5,7 +5,7 @@ class Page < ApplicationRecord
   validates :text_color, allow_blank: true, css_hex_color: true
 
   belongs_to :pet, inverse_of: :page, optional: true
-  has_many :noises, inverse_of: :page
+  has_many :noises, inverse_of: :page, dependent: :destroy
 
   has_attached_file :background
   validates_attachment_content_type :background, content_type: /\Aimage\/.*\z/
