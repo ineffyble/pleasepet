@@ -4,7 +4,7 @@ class Page < ApplicationRecord
 
   validates :text_color, allow_blank: true, css_hex_color: true
 
-  belongs_to :pet, inverse_of: :page
+  belongs_to :pet, inverse_of: :page, optional: true
   has_many :noises, inverse_of: :page
 
   has_attached_file :background
