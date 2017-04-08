@@ -14,3 +14,27 @@ This project is in the process of being cleaned up, as it has been hastily redev
 
 ### Contributing
 Pull requests are very welcome and encouraged.
+
+### Getting Started
+
+#### Installing
+
+Make sure you have Ruby and Rails set up beforehand.
+
+Clone the git repo into your preferred location, and then from there run:
+```
+bundle install --without production
+bundle exec rake db:migrate
+```
+This will set up the dependencies and the pet database. 
+
+#### Running
+
+To start the server, run `rails s` from the project directory.
+
+
+
+
+
+
+ 
