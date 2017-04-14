@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # Custom redirects and routes
   get '/evelyn' => redirect("http://evelyn.pet")
   get '/naptime' => 'index#naptime'
+  get '/pets' => 'index#view'
   # Pettings
   get '/pettings' => 'pet_interactions#index'
   post '/:url/petting'  => 'pet_interactions#do_a_petting'
