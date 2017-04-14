@@ -10,3 +10,4 @@ kitten:
   pet_id: 2
   url: kitten
   name: Kitten
+  allow_anon_petting: true
