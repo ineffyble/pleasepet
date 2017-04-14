@@ -92,7 +92,7 @@ class PetInteractionsController < ApplicationController
     if pet_interaction.first_petting.nil?
       pet_interaction.first_petting = now
     end
-    unless !pet_interaction.last_petting.nil? && pet_interaction.last_petting < now
+    if pet_interaction.last_petting.nil? or now > pet_interaction.last_petting
       pet_interaction.last_petting = now
     end
     pet_interaction.save!
