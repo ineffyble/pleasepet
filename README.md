@@ -1,4 +1,5 @@
 # PleasePet
+[![Build Status](https://travis-ci.org/ineffyble/pleasepet.svg?branch=master)](https://travis-ci.org/ineffyble/pleasepet)
 
 [PleasePet](https://please.pet) is a web app for petting pets online.
 
