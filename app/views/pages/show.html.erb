@@ -1,7 +1,11 @@
 <% pet_name = @page.pet_name || @page.url %>
 <div id="pet" data-page-url="<%= @page.url %>">
   <div class="jumbotron">
-    <h1 class="adaptive">Please pet <%= pet_name %></h1>
+    <% if @page.url == 'dog' %>
+      <h1 class="adaptive">AWARE OF DOG<br>pleas pet dog</h1>
+    <% else %>
+      <h1 class="adaptive">Please pet <%= pet_name %></h1>
+    <% end %>
     <h2 class="adaptive"><%= pet_name %> has been petted <span id="petcount"><%= @page.pet_received_pettings_count || 0 %></span> times.</h2>
     <% if @page.allow_anon_petting? || current_pet %>
         <input type="submit" class="btn btn-primary btn-lg" value="Pet <%= pet_name %>" onClick="pet()">
