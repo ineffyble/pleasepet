@@ -2,10 +2,12 @@ class PetInteractionsController < ApplicationController
   # Find appropriate records
   before_action :set_pet_interactions_for_pet, only: [:index]
   before_action :set_page_and_pet, only: [:do_a_petting, :how_many_pettings]
-  before_action :set_pet_interaction, only: [:do_a_petting]
   # Verify legitimacy of incoming petting parameters
   before_action :not_too_many_pettings, only: [:do_a_petting]
   before_action :only_wanted_pettings, only: [:do_a_petting]
+  # Set pet interaction
+  before_action :set_pet_interaction, only: [:do_a_petting]
+
 
   def index; end
 
