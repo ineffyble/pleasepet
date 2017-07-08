@@ -1,7 +1,7 @@
 # PleasePet
 [![Build Status](https://travis-ci.org/ineffyble/pleasepet.svg?branch=master)](https://travis-ci.org/ineffyble/pleasepet)
 
-[PleasePet](https://please.pet) is a web app for petting pets online.
+PleasePet is a web app for petting pets online. Originally hosted at https://please.pet, this project has been postponed due to developer capacity.
 
 This project is in the process of being cleaned up, as it has been hastily redeveloped to cope with increased capacity.
 
