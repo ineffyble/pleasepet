@@ -1,3 +1,6 @@
+### This repository is no longer in use. The PleasePet project has been continued by Sammy Kerfan at [sammy123k/pleasepet](https://github.com/sammy123k/pleasepet) - please see there for updates.
+
+
 # PleasePet
 [![Build Status](https://travis-ci.org/ineffyble/pleasepet.svg?branch=master)](https://travis-ci.org/ineffyble/pleasepet)
 
